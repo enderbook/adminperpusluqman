@@ -21,6 +21,7 @@ RUN composer install --optimize-autoloader --no-interaction
 # Install & build frontend
 RUN npm install
 RUN npm run build
+RUN php artisan migrate --force
 
 EXPOSE 8000
 
