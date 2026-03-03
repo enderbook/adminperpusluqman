@@ -1,20 +1,17 @@
 FROM php:8.3-cli
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git unzip libzip-dev zip \
     libicu-dev \
-    && docker-php-ext-install intl zip
+    && docker-php-ext-install intl zip pdo_mysql
 
-# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
-
 COPY . .
 
 RUN composer install --optimize-autoloader --no-interaction
 
 EXPOSE 8000
 
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT}
+CMD php artisan serve --host=0.0.0.0 --port=${PORT}
