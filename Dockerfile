@@ -26,4 +26,4 @@ EXPOSE 8000
 
 CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT}
 
-RUN php artisan make:filament-user --name=luqman --email=luqman@gmail.com --password=12
+
